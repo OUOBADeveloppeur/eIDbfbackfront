@@ -1,0 +1,279 @@
+{
+  "routes": [
+ 
+    {
+      "path": "",
+      "title": "MENUITEMS.DASHBOARD.TEXT",
+      "iconType": "feather",
+      "icon": "monitor",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": [
+        {
+          "path": "/admin/dashboard/main",
+          "title": "MENUITEMS.DASHBOARD.LIST.DASHBOARD2",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": [""],
+          "submenu": []
+        }
+        
+      ]
+    },
+   
+ 
+     {
+      "path": "",
+      "title": "MENUITEMS.ADMIN.TEXT",
+      "iconType": "feather",
+      "icon": "users",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": [
+        {
+          "path": "/admin/admin/all-admin",
+          "title": "MENUITEMS.ADMIN.LIST.ALL-ADMIN",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": [""],
+          "submenu": []
+        }
+      ]
+    },
+
+     {
+      "path": "",
+      "title": "MENUITEMS.EMPLOYEES.TEXT",
+      "iconType": "feather",
+      "icon": "users",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": [
+        {
+          "path": "/admin/citoyens/allCitoyens",
+          "title": "MENUITEMS.EMPLOYEES.LIST.ALL-EMPLOYEE",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": ["Admin"],
+          "submenu": []
+        }
+          
+    
+      ]
+    },
+
+    { "path":"",
+      "title": "citoyen-documents",
+        "iconType": "",
+      "icon": "",
+      "class": "ml-menu",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": []
+            },
+    
+  
+    {
+      "path": "",
+      "title": "MENUITEMS.HOLIDAYS.TEXT",
+      "iconType": "feather",
+      "icon": "package",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": [
+        {
+          "path": "/admin/autorites/all-autorites",
+          "title": "MENUITEMS.HOLIDAYS.LIST.ALL-HOLIDAYS",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": ["Admin"],
+          "submenu": []
+        }
+      ]
+    },
+    {
+      "path": "/admin/type-documents/all-type-documents",
+      "title": "Types de documents",
+      "iconType": "feather",
+      "icon": "file-text",
+      "class": "",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": []
+    },
+       {
+      "path": "",
+      "title": "Eservices",
+      "iconType": "feather",
+      "icon": "monitor",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Admin"],
+      "submenu": [
+        {
+          "path": "/admin/eservices/all-eservices",
+          "title": "E-services disponibles",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": ["Admin"],
+          "submenu": []
+        }
+      ]
+    },
+    
+
+   
+ 
+   
+
+ 
+  
+  
+ 
+    {
+      "path": "/client/dashboard",
+      "title": "MENUITEMS.CLIENT.DASHBOARD",
+      "iconType": "feather",
+      "icon": "airplay",
+      "class": "",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Client"],
+      "submenu": []
+    },
+    {
+      "path": "",
+      "title": "MENUITEMS.CLIENT.PROJECTS.TEXT",
+      "iconType": "feather",
+      "icon": "package",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Client"],
+      "submenu": [
+        {
+          "path": "/client/projects/myProjects",
+          "title": "MENUITEMS.CLIENT.PROJECTS.LIST.MY-PROJECTS",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": [""],
+          "submenu": []
+        }
+       
+      ]
+    },
+     {
+      "path": "",
+      "title": "MENUITEMS.CLIENT.TRANSACTIONS.TEXT",
+      "iconType": "feather",
+      "icon": "package",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Client"],
+      "submenu": [
+        {
+          "path": "/client/transactions",
+          "title": "MENUITEMS.CLIENT.TRANSACTIONS.LIST.TRANSACTIONS",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": [""],
+          "submenu": []
+        }
+       
+      ]
+    },
+
+     {
+      "path": "",
+      "title": "MENUITEMS.CLIENT.PAYOUTS.TEXT",
+      "iconType": "feather",
+      "icon": "package",
+      "class": "menu-toggle",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["Client"],
+      "submenu": [
+        {
+          "path": "/client/payouts",
+          "title": "MENUITEMS.CLIENT.PAYOUTS.LIST.PAYOUTS",
+          "iconType": "",
+          "icon": "",
+          "class": "ml-menu",
+          "groupTitle": false,
+          "badge": "",
+          "badgeClass": "",
+          "role": [""],
+          "submenu": []
+        }
+       
+      ]
+    }
+    
+
+  
+ 
+
+
+  
+  
+
+    
+    
+    
+  
+    
+    
+    
+  ]
+}

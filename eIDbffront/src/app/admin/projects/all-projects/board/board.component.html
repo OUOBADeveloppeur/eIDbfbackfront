@@ -1,0 +1,135 @@
+<div class="board" style="width:auto;">
+  @for (list of $any(lists) | keyvalue: unsorted; track list) {
+    <div class="list" style="width: 500px; margin-right: 15px;">
+      <div class="header">
+        <div class="title">
+          <h2>
+            @switch (list.key) {
+              @case ('NEWPROJECTS') {
+               Nouveau projet
+              }
+              @case ('RUNNING') {
+                En cours
+              }
+              @case ('ONHOLD') {
+                Annulés
+              }
+              @case ('FINISHED') {
+                Terminés
+              }
+               @case ('ATTENTE') {
+                En attente
+              }
+               @case ('NOTSTART') {
+                Non démarrés
+              }
+            }
+          </h2>
+          <div class="count">{{ $any(list).value.length }}
+            {{ $any(list).value.length | pluralize: 'project':'projects':'projects' }}
+          </div>
+        </div>
+      </div>
+      <ul class="projects" style="width:auto;" id="{{ list.key }}" cdkDropList cdkDropListSortingDisabled [cdkDropListData]="list.value"
+        [cdkDropListConnectedTo]="['NEWPROJECTS', 'RUNNING', 'ONHOLD', 'FINISHED','ATTENTE','NOTSTART']" (cdkDropListDropped)="drop($event)">
+        @for (project of $any(list).value; track project) {
+          <li class="project " cdkDrag [cdkDragData]="project" (dblclick)="editProjectDialog(project)"
+            >
+            <h4 class="project-title"><span class="material-icons-outlined project-icon">
+              task_alt
+            </span>{{ project.nom }}</h4>
+            <!--<small class="block text-ellipsis m-b-15">
+              <span class="text-xs">{{ project.open_task }}</span> <span class="text-muted"> open tasks </span>
+            </small>-->
+            <span  class="project-bedge project-type-{{ project.type_libelle }}">
+              <div class="pro-left " >
+                {{project.type_libelle}}
+               
+              </div>
+            </span>
+
+          <p class="mt-3" style="font-size: 25x;" [innerHTML]="project.truncatedHtml"></p>
+             <div class="project-members m-b-15">
+              <ul class="team-members">
+                <li class="dropdown avatar-dropdown">
+                  <div class="row">
+                    <!--<div class="col-5 pro-left mb-2">Created:</div>
+                    <div class="col-7 pro-left mb-2"> <span class="material-icons-outlined project-icon2">
+                      date_range
+                    </span>{{ project.created | date }}</div>-->
+                    <div class="col-5 pro-left mb-2">Responsable:</div>
+                    <div class="col-7 pro-left mb-2">{{ project.responsable }}</div>
+                    <div class="col-5 pro-left mb-2">Priorité:</div>
+
+                   
+
+                    <div class="col-7 pro-lef mb-2 project-priority-{{ project.priority }}">
+                      @if (project.priority === 2) {
+                        <span class="material-icons-outlined project-icon" style="color: chartreuse;">
+                          keyboard_double_arrow_up
+                        </span>Elevée
+                      }
+                      @if (project.priority === 1) {
+                        <span class="material-icons-outlined project-icon" >
+                          switch_right
+                        </span>Moyenne
+                      }
+                      @if (project.priority === 0) {
+                        <span class="material-icons-outlined project-icon">
+                          keyboard_double_arrow_down
+                        </span>Basse
+                      }
+                    </div>
+                    <div class="col-5 pro-left mb-2">Date de fin prevue:</div>
+                    <div class="col-7 pro-left mb-2">
+                      @if (project.endDate) {
+                        <div class="deadline">
+                          <span class="material-icons-outlined project-icon2">
+                            date_range
+                          </span>{{ project.endDate }}
+                        </div>
+                      }
+                    </div>
+                    <!--<div class="col-5 pro-left mb-2">Comments:</div>
+                    <div class="col-7 pro-left mb-2">{{ project.comments }}</div>
+                    <div class="col-5 pro-left mb-2">Bug:</div>
+                    <div class="col-7 pro-left mb-2">{{ project.bugs }}</div>
+                    <div class="col-5 pro-left mb-2">Team:</div>
+                    <div class="col-7 pro-left">
+                      <ul class="list-unstyled order-list">
+                        <li class="avatar avatar-sm"><img src="assets/images/user/user1.jpg" alt="user"
+                        class="rounded-circle"></li>
+                        <li class="avatar avatar-sm"><img src="assets/images/user/user2.jpg" alt="user"
+                        class="rounded-circle"></li>
+                        <li class="avatar avatar-sm"><img src="assets/images/user/user3.jpg" alt="user"
+                        class="rounded-circle"></li>
+                        <li class="avatar avatar-sm"><span class="badge">+4</span></li>
+                      </ul>
+                    </div>-->
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <p class="m-b-5">Taux de progression <span class="text-success float-end">{{ project.progression }}%</span></p>
+            <div class="progress progress-xs mb-0">
+              <mat-progress-bar mode="determinate" value="{{ project.progression }}"></mat-progress-bar>
+            </div>
+            <button mat-icon-button class="project-actions" [matMenuTriggerFor]="menu" (dblclick)="null">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" class="project-actions-menu">
+              <button mat-menu-item (click)="editProjectDialog(project)">
+                <mat-icon>edit</mat-icon>
+                <span>Modiffier</span>
+              </button>
+              <button mat-menu-item (click)="removeProject(project)">
+                <mat-icon>delete</mat-icon>
+                <span>Supprimer</span>
+              </button>
+            </mat-menu>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>

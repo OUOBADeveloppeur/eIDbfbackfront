@@ -1,0 +1,18 @@
+:host ::ng-deep .column-filter .mat-mdc-select-arrow {
+  display: none;
+}
+:host ::ng-deep .advance-table .mat-mdc-header-cell {
+  font-weight: 500;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;   /* ⭐ clé */
+}
+
+
+
+.actions-cell {
+  min-width: 200px;
+  white-space: nowrap;
+}

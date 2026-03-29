@@ -1,0 +1,54 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <!--<label class="hoverable" for="tableFileInput">
+        <img [src]='leads.img' alt="avatar">
+      </label>-->
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="leadsForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Responsable</mat-label>
+                    <mat-select formControlName="chef" >
+                      @for (team of employes; track team) {
+                      <mat-option [value]="team.id">{{team.nom}} {{team.prenom}}
+                      </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                 <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Departement</mat-label>
+                    <mat-select formControlName="departement" >
+                      @for (team of departements; track team) {
+                      <mat-option [value]="team.id">{{team.nom}} 
+                      </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+        </div>
+      </div>
+
+ 
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!leadsForm.valid" [mat-dialog-close]="1"
+              type="submit">  {{ action === 'edit' ? 'Modifier' : 'Enregistrer' }}</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

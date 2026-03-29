@@ -1,0 +1,22 @@
+<h2 mat-dialog-title class="text-center">Uploader une photo</h2>
+
+<mat-dialog-content class="text-center">
+  <!-- Photo actuelle / avatar -->
+ 
+  <!-- Input fichier stylé -->
+  <div class="file-input-container mb-4">
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden>
+    <label for="fileInput" class="btn btn-outline-primary upload-btn">
+      <mat-icon>upload</mat-icon> Choisir une photo
+    </label>
+    <span *ngIf="selectedFile" class="selected-file-name">{{ selectedFile?.name }}</span>
+  </div>
+
+  <!-- Boutons d'action -->
+
+    <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" (click)="uploadPhoto()" 
+              type="submit">Valider</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" (click)="cancel()" tabindex="-1">Annuler</button>
+          </div>
+</mat-dialog-content>

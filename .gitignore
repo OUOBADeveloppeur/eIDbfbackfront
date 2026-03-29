@@ -1,0 +1,22 @@
+# Backend
+backfid_refont/target/
+*.class
+*.jar
+*.war
+
+# Frontend
+eIDbffront/node_modules/
+eIDbffront/.angular/
+eIDbffront/dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/

@@ -1,0 +1,205 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Add Projects'" [items]="['Projects']" [active_item]="'Add Projects'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Ajout d'un projet</h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Project ID</mat-label>
+                    <input matInput formControlName="projectID" required>
+                    @if (projectForm.get('projectID')?.hasError('required')) {
+                    <mat-error>
+                      Project ID is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>-->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Titre</mat-label>
+                    <input matInput formControlName="projectTitle" placeholder="Project Title" required>
+                    @if (projectForm.get('projectTitle')?.hasError('required')) {
+                    <mat-error>
+                      Le titre est obligatoire
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Client</mat-label>
+                    <mat-select formControlName="client" required>
+                      <mat-option *ngFor="let ben of beneficiaires" [value]="ben.id">
+                          {{ ben.structure }}
+                        </mat-option>
+                    </mat-select>
+                    @if (projectForm.get('client')?.hasError('required')) {
+                    <mat-error>
+                      Le client est obligatoire
+                    </mat-error>
+                    }
+                  </mat-form-field>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Departement</mat-label>
+                    <mat-select formControlName="department" required>
+                       <mat-option *ngFor="let dep of departements" [value]="dep.id">
+                          {{ dep.nom }}
+                        </mat-option>
+                    </mat-select>
+                    @if (projectForm.get('department')?.hasError('required')) {
+                    <mat-error>
+                      Le departement est obligatoire
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Priorité</mat-label>
+                    <mat-select formControlName="priority" required>
+                      <mat-option [value]="'Basse'">
+                        Basse
+                      </mat-option>
+                      <mat-option [value]="'Moyenne'">
+                        Moyenne
+                      </mat-option>
+                      <mat-option [value]="'Elevée'">
+                        Elevée
+                      </mat-option>
+                    </mat-select>
+                    @if (projectForm.get('priority')?.hasError('required')) {
+                    <mat-error>
+                     La priorité est obligatoire
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+           
+
+
+                <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Client</mat-label>
+                    <input matInput formControlName="client" required>
+                    @if (projectForm.get('client')?.hasError('required')) {
+                    <mat-error>
+                      Client name is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>-->
+                <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Price</mat-label>
+                    <input matInput formControlName="price" type="number" required>
+                    @if (projectForm.get('price')?.hasError('required')) {
+                    <mat-error>
+                      Price is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>-->
+              </div>
+              <div class="row">
+
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date de début</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="startDate" required>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                                        <!--<input matInput [matDatepicker]="picker" formControlName="startDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>-->
+                    @if (projectForm.get('startDate')?.hasError('required')) {
+                    <mat-error>
+                     Veuillez selectionner une date
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date de fin prevue</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="endDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    @if (projectForm.get('endDate')?.hasError('required')) {
+                    <mat-error>
+                       Veuillez selectionner une date
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Responsable</mat-label>
+                    <mat-select formControlName="team" multiple required>
+                      @for (team of employes; track team) {
+                      <mat-option [value]="team.id">{{team.nom}} {{team.prenom}}
+                      </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+                  <mat-label> Status: </mat-label>
+                 <mat-radio-group formControlName="status">
+                  <mat-radio-button value="Active">Actif</mat-radio-button>
+                  <mat-radio-button value="Actif">Terminé</mat-radio-button>
+                  <mat-radio-button value="En cours" [checked]="true">En cours</mat-radio-button>
+                  <mat-radio-button value="En attente">En attente</mat-radio-button>
+                  <mat-radio-button value="Non démarré">Non démarré</mat-radio-button>
+                  <mat-radio-button value="Annulé">Annulé</mat-radio-button>
+                </mat-radio-group>
+
+                </div>
+              </div>
+              <div class="row">
+                <mat-label>Description: </mat-label>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <div class="NgxEditor__Wrapper">
+                    <ngx-editor-menu [editor]="editor!" [toolbar]="toolbar!"> </ngx-editor-menu>
+                    <ngx-editor formControlName="description" [editor]="editor!" [placeholder]="'Type here...'" class="NgxEditorStyles"></ngx-editor>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-label>Upload Image</mat-label>
+                  <app-file-upload formControlName="fileUpload"></app-file-upload>
+                </div>
+              </div>-->
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button class="btn-space" [disabled]="!projectForm.valid " mat-raised-button
+                    color="primary">Submit</button>
+                  <button type="button" mat-flat-button class="formCancelBtn">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

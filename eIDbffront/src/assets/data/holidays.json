@@ -1,0 +1,13 @@
+[
+   {
+            "dateExpiration": "30/06/2025",
+            "description": "Test test test test",
+            "devise": "FCFA",
+            "forfait": "Annuel",
+            "hebergeur": "LWS",
+            "id": 3,
+            "montant": "60000",
+            "service": "JPAIE",
+            "statut": "Actif"
+        }
+]

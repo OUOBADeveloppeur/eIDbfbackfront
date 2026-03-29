@@ -1,0 +1,48 @@
+
+<div class="addContainer">
+    <div class="modalHeader">
+    <div class="avatarDetails">
+      <label class="hoverable" for="tableFileInput">
+        <!-- Avatar par défaut ou initiales -->
+        <div class="avatar-placeholder">
+          {{ name }}
+        </div>
+      </label>
+      <div class="modalTitle">
+       Ajout du logo
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+    <div mat-dialog-content>
+
+<form [formGroup]="imageForm"  class="register-form m-4" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="image" class="form-label">Choisir une image</label>
+    <input
+      type="file"
+      id="image"
+      (change)="onFileSelected($event)"
+      accept="image/*"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <div class="mb-3" *ngIf="imagePreview">
+    <img [src]="imagePreview" alt="Aperçu" width="200" />
+  </div>
+
+  <button mat-flat-button color="primary" type="submit" [disabled]="!selectedFile">
+    Envoyer
+  </button>
+</form>
+
+    </div>
+
+</div>
+
+

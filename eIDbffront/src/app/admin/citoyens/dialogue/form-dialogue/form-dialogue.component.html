@@ -1,0 +1,137 @@
+<div class="addContainer">
+    <div class="modalHeader">
+        <div class="avatarDetails">
+            <div class="modalTitle">
+                {{dialogTitle}}
+            </div>
+        </div>
+        <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content>
+        <form class="register-form m-4" [formGroup]="documentForm" (ngSubmit)="submit()">
+          
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Type de document</mat-label>
+                        <mat-select formControlName="typeDocument">
+                            @for (team of typedocuments; track team) {
+                            <mat-option [value]="team.id">{{team.libelle}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Autorité de délivrance</mat-label>
+                        <mat-select formControlName="autorite">
+                            @for (team of autorites; track team) {
+                            <mat-option [value]="team.id">{{team.libelle}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Date de délivrance</mat-label>
+
+                        <input matInput [matDatepicker]="dateDelivrancePicker" formControlName="dateDelivrance"
+                            required>
+
+                        <mat-datepicker-toggle matSuffix [for]="dateDelivrancePicker">
+                        </mat-datepicker-toggle>
+
+                        <mat-datepicker #dateDelivrancePicker></mat-datepicker>
+
+                        @if (documentForm.get('dateDelivrance')?.hasError('required')) {
+                        <mat-error>Veuillez sélectionner une date</mat-error>
+                        }
+                    </mat-form-field>
+
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Date d'expiration</mat-label>
+                        <input matInput [matDatepicker]="joiningPicker" formControlName="dateExpiration">
+                        <mat-datepicker-toggle matSuffix [for]="joiningPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #joiningPicker></mat-datepicker>
+
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Numéro</mat-label>
+                        <input matInput formControlName="numero">
+
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Reference</mat-label>
+                        <input matInput formControlName="reference" required>
+                        @if (documentForm.get('reference')?.hasError('required')) {
+                        <mat-error>
+                            La reference est obligatoire
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Lieu d'etablissement</mat-label>
+                        <input matInput formControlName="lieuEtablissement">
+
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Taille</mat-label>
+                        <input matInput formControlName="taille" type="number">
+
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Contenu textuel</mat-label>
+                        <input matInput formControlName="contenu" type="text">
+
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="example-button-row">
+                        <button mat-flat-button class="formSubmitBtn"
+                            [disabled]="(action==='edit' && !documentForm.valid) " type="submit">
+                            {{ action === 'edit' ? 'Modifier' : 'Enregistrer' }}
+                        </button>
+                        <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

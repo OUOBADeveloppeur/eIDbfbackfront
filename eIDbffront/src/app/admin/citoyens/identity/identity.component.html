@@ -1,0 +1,209 @@
+
+@if(data){
+    <div  class="container">
+  <div class="header">
+    <h1 style="text-align: center;">{{nomComplet}}</h1>
+  </div>
+  <div class="photo-container2">
+    <img 
+            [src]="photoUrl+iu" 
+            alt="Photo d'identité" 
+            class="photo"
+            >
+  </div>
+   <div class="header">
+    <h2 style="text-align: center;">Identifiant unique <p style="color: blue;">{{iu}}</p> </h2>
+  </div>
+   <div  style="margin-left: 40px;" class="row">
+    <div class="col"><h3>Date de naissance<p style="color: blue;">{{data.dateNaissance | date:'dd/MM/yyyy' }}</p> </h3>
+</div>
+    <div class="col"><h3>Sexe <p style="color: blue;">{{data.sexe}}</p> </h3>
+</div>
+  </div>
+  
+   <div class="row" style="margin-left: 40px;">
+    <div class="col"><h3>Nationalité <p style="color: blue;">{{data.nationalite}}</p> </h3>
+</div>
+    <div class="col"><h3>Lieu de naissance <p style="color: blue;">{{data.lieuNaissance}}</p> </h3>
+</div>
+
+  </div>
+  
+
+  <div style="text-align: center;margin-top: 40px;"><h2>Documents d'itentité</h2></div>
+
+  <div class="documents-grid">
+    <mat-card *ngFor="let doc of documents" class="document-card">
+      <!-- Header avec libellé -->
+      <mat-card-header class="card-header">
+        <mat-icon class="header-icon">description</mat-icon>
+        <mat-card-title>{{ doc.libelle }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-content">
+        <!-- Section principale avec photo et infos -->
+        <div class="main-section">
+          <!-- Photo à gauche -->
+         <div class="photo-container">
+        <img 
+            [src]="photoBase + doc.id" 
+            alt="Photo d'identité" 
+            class="photo"
+            (error)="onImageError($event)">
+        </div>
+
+
+          <!-- Informations principales à droite -->
+         <div class="info-main">
+            <div class="info-row">
+              <mat-icon class="info-icon">business</mat-icon>
+              <div class="info-text">
+                <span class="info-label">Autorité de délivrance</span>
+                <span *ngIf="doc.libelle=='Certificat de nationalité'" class="info-value">{{ doc.autorite }} de {{doc.lieuEtablissement}}</span>
+                <span *ngIf="doc.libelle!=='Certificat de nationalité'" class="info-value">{{ doc.autorite }}</span>
+
+              </div>
+            </div>
+             <div class="info-row">
+            <mat-icon class="info-icon">fingerprint</mat-icon>
+            <div class="info-text">
+            <span class="info-label">Référence</span>
+            <span class="info-value">{{ doc.reference }}</span>
+            </div>
+        </div>
+
+        <div *ngIf="doc.nip" class="info-row">
+            <mat-icon class="info-icon">key</mat-icon>
+            <div class="info-text">
+            <span class="info-label">NIP</span>
+            <span class="info-value">{{ doc.nip }}</span>
+            </div>
+        </div>
+
+         <div class="info-row-group">
+    <div class="info-row info-row-half">
+      <mat-icon class="info-icon">face</mat-icon>
+      <div class="info-text">
+        <span class="info-label">Nom</span>
+        <span class="info-value">{{ data.nom }}</span>
+      </div>
+    </div>
+    <div class="info-row info-row-half">
+      <mat-icon class="info-icon">face</mat-icon>
+      <div class="info-text">
+        <span class="info-label">Prénom</span>
+        <span class="info-value">{{ data.prenom }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="info-row-group">
+     <div class="info-row info-row-half">
+    <mat-icon class="info-icon">
+      {{ data.sexe === 'Masculin' ? 'male' :
+         data.sexe === 'Feminin' ? 'female' : 'transgender' }}
+    </mat-icon>
+    <div class="info-text">
+      <span class="info-label">Sexe</span>
+      <span class="info-value">{{ data.sexe }}</span>
+    </div>
+  </div>
+
+  <div class="info-row info-row-half" *ngIf="doc.taille">
+    <mat-icon class="info-icon">rule</mat-icon>
+    <div class="info-text">
+      <span class="info-label">Taille</span>
+      <span class="info-value">{{ doc.taille }} cm</span>
+    </div>
+  </div>
+
+  </div>
+
+<div class="info-row-group">
+  <div class="info-row info-row-half">
+              <mat-icon class="info-icon">event</mat-icon>
+              <div class="info-text">
+                <span class="info-label">Date de délivrance</span>
+                <span class="info-value">{{ doc.dateDelivrance | date:'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+
+            <div *ngIf="doc.dateExpiration" class="info-row">
+              <mat-icon class="info-icon">event_available</mat-icon>
+              <div class="info-text">
+                <span class="info-label">Date d'expiration</span>
+                <span class="info-value">{{ doc.dateExpiration | date:'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+
+</div>
+            
+             <div *ngIf="doc.lieuEtablissement" class="info-row info-row-half">
+            <mat-icon class="info-icon">location_on</mat-icon>
+            <div class="info-text">
+            <span class="info-label">Lieu d’établissement</span>
+            <span class="info-value">{{ doc.lieuEtablissement }}</span>
+            </div>
+        </div>
+          </div>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <!-- Section informations supplémentaires -->
+        <div class="additional-info">
+          <div class="info-row">
+            <mat-icon class="info-icon">cake</mat-icon>
+            <div class="info-text">
+              <span class="info-label">Date de naissance</span>
+              <span class="info-value">{{ data.dateNaissance | date:'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <mat-icon class="info-icon">location_on</mat-icon>
+            <div class="info-text">
+              <span class="info-label">Lieu de naissance</span>
+              <span class="info-value">{{ data.lieuNaissance }}</span>
+            </div>
+          </div>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <!-- Description -->
+        <div *ngIf="doc.contenu" class="description-section">
+          <div class="info-row">
+            <mat-icon class="info-icon">info</mat-icon>
+            <div class="info-text">
+             
+              <span class="info-value description-text">
+                                <p *ngFor="let paragraph of doc.contenu.split(';')" class="description-paragraph">
+                    {{ paragraph.trim() }}
+                </p>
+               </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badge de statut -->
+        <div *ngIf="doc.etat=='VALIDE'" class="status-badge">
+          <mat-chip class="valid-chip">Valide</mat-chip>
+        </div>
+         <div *ngIf="doc.etat=='INVALIDE'" class="status-badge">
+          <mat-chip class="valid-chip">Invalide</mat-chip>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+}
+@else {
+<div class="container">
+     <div class="header">
+    <h1 style="color: red; text-align: center; margin-top: 60px;">Echec de verification, le Qrcode a peut etre expiré </h1>
+  </div>
+
+</div>
+}
+

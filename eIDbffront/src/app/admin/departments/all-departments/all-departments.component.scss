@@ -1,0 +1,16 @@
+:host ::ng-deep .column-filter .mat-mdc-select-arrow {
+  display: none;
+}
+:host ::ng-deep .advance-table .mat-mdc-header-cell {
+  font-weight: 500;
+}
+:host ::ng-deep .mat-column-hod {
+  min-width: 250px;
+}
+
+.large-cell {
+  font-size: 16px;   // augmente la taille du texte
+  padding: 16px;     // augmente l'espacement dans la cellule
+  height: 60px; 
+  width: 250;     // augmente la hauteur des lignes si besoin
+}

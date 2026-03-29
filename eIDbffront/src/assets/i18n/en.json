@@ -1,0 +1,190 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Principal"
+    },
+    "DASHBOARD": {
+      "TEXT": "Tableau de bord",
+      "LIST": {
+        "DASHBOARD1": "Tableau de bord 1",
+        "DASHBOARD2": "Tableau de bord"
+      }
+    },
+    "PROJECTS": {
+      "TEXT": "Projets",
+      "LIST": {
+        "ALL-PROJECTS": "Tous les projets",
+        "ADD-PROJECT": "Ajouter un projet",
+        "ESTIMATES": "Devis",
+        "PROJECT-DETAILS": "Détails du projet"
+      }
+    },
+    "EMPLOYEES": {
+      "TEXT": "Citoyens",
+      "LIST": {
+        "ALL-EMPLOYEE": "Citoyens enrollés",
+        "ADD-EMPLOYEE": "Ajouter un citoyen",
+        "EDIT-EMPLOYEE": "Modifier un citoyen",
+        "EMPLOYEE-SHIFT": "Poste de l'employé",
+        "PROFILE": "Profil de l'employé"
+      }
+    },
+     "ADMIN": {
+      "TEXT": "Utilisateurs",
+      "LIST": {
+        "ALL-ADMIN": "Tous les utilisateurs",
+        "ADD-ADMIN": "Ajouter un utilisateur",
+        "EDIT-ADMIN": "Modifier un utilisateur"
+
+      }
+    },
+    "CLIENTS": {
+      "TEXT": "Clients",
+      "LIST": {
+        "ALL-CLIENTS": "Tous les clients",
+        "ADD-CLIENT": "Ajouter un client",
+        "EDIT-CLIENT": "Modifier un client"
+      }
+    },
+    "ACCOUNTS": {
+      "TEXT": "Comptabilité",
+      "LIST": {
+        "CLIENT-PAYMENTS": "Paiements clients",
+        "ADD-PAYMENT": "Ajouter un paiement",
+        "INVOICE": "Facture"
+      }
+    },
+    "PAYROLL": {
+      "TEXT": "Paiements sortants",
+      "LIST": {
+        "EMPLOYEE_SALARY": "Tous les paiements sortants",
+        "PAYSLIP": ""
+      }
+    },
+
+       "API": {
+      "TEXT": "Apis",
+      "LIST": {
+        "API": "Apis disponibles"
+      
+      }
+    },
+    "LEADERS": {
+      "TEXT": "Responsables"
+    },
+    "JOBS": {
+      "TEXT": "Emplois",
+      "LIST": {
+        "JOBS_LIST": "Liste des emplois",
+        "RESUMES": "CVs",
+        "CANDIDATES": "Candidats",
+        "SHORTLIST_CANDIDATES": "Candidats présélectionnés"
+      }
+    },
+    "DEPARTMENTS": {
+      "TEXT": "Départements",
+      "LIST": {
+        "ALL-DEPARTMENT": "Tous les départements",
+        "ADD-DEPARTMENT": "Ajouter un département",
+        "EDIT-DEPARTMENT": "Modifier un département"
+      }
+    },
+    "TRAINING": {
+      "TEXT": "Formation",
+      "LIST": {
+        "TRAINING-List": "Liste des formations",
+        "TRAINERS": "Formateurs",
+        "TRAINING-TYPE": "Type de formation"
+      }
+    },
+    "REPORTS": {
+      "TEXT": "Rapports",
+      "LIST": {
+        "LEAVE_REPORT": "Rapport de congés",
+        "EXPENSE_REPORT": "Rapport de dépenses"
+      }
+    },
+    "EMPLOYEE": {
+      "DASHBOARD": "Tableau de bord",
+      "ATTENDANCE": "Présence",
+      "MY-LEAVES": "Mes congés",
+      "MYTEAM": "Mon équipe",
+      "MYPROJECTS": "Mes plateformes",
+      "MYTASKS": "Mes tâches",
+      "SETTINGS": "Paramètres",
+      "CHAT": "Messagerie"
+    },
+    "LEAVES": {
+      "TEXT": "Gestion des congés",
+      "LIST": {
+        "LEAVE-REQUESTS": "Toutes les demandes de congé",
+        "LEAVE-BALANCE": "Solde de congés",
+        "LEAVE-TYPES": "Types de congés",
+        "LEAVE-SETTINGS": "Paramètres des congés"
+      }
+    },
+    "HOLIDAYS": {
+      "TEXT": "Autorités de delivrance",
+      "LIST": {
+        "ALL-HOLIDAYS": "Autorités de delivrance disponibles",
+        "ADD-HOLIDAY": "Ajouter un jour férié",
+        "EDIT-HOLIDAY": "Modifier un jour férié"
+      }
+    },
+    "ATTENDANCE": {
+      "TEXT": "Présence",
+      "LIST": {
+        "TODAY": "Présence d'aujourd'hui",
+        "EMPLOYEE": "Présence des employés",
+        "SHEET": "Feuille de présence"
+      }
+    },
+    "CLIENT": {
+      "TEXT": "Client",
+      "DASHBOARD": "Tableau de bord",
+      "PROJECTS": {
+        "TEXT": "Plateformes",
+        "LIST": {
+          "MY-PROJECTS": "Mes plateformes",
+          "PROJECT-DETAILS": "Détails du projet"
+        }
+      },
+      "TRANSACTIONS": {
+        "TEXT": "Autorités de delivrance",
+        "LIST": {
+          "TRANSACTIONS": "Autorités de delivrance"
+         
+        }
+      },
+      "PAYOUTS": {
+        "TEXT": "Paiements",
+        "LIST": {
+          "PAYOUTS": "Paiements"
+         
+        }
+      },
+      "SUPPORTS": {
+        "TEXT": "Support",
+        "LIST": {
+          "TICKETS": "Tickets",
+          "TICKET-DETAILS": "Détails du ticket"
+        }
+      },
+      "BILLING": "Facturation",
+      "CHAT": "Messagerie",
+      "SETTINGS": "Paramètres"
+    },
+    "APPS": {
+      "TEXT": "Applications"
+    },
+    "CALENDAR": {
+      "TEXT": "Calendrier"
+    },
+    "TASK": {
+      "TEXT": "Tâche"
+    },
+    "CONTACTS": {
+      "TEXT": "Contacts"
+    }
+  }
+}

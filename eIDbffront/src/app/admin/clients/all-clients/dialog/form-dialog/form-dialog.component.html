@@ -1,0 +1,155 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <label class="hoverable" for="tableFileInput">
+        <!-- Avatar par défaut ou initiales -->
+        <div class="avatar-placeholder">
+          {{ clients.nom.charAt(0) + clients.prenom.charAt(0) }}
+        </div>
+      </label>
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="clientForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="nom" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>person</mat-icon>
+            @if (clientForm.get('nom')?.hasError('required')) {
+            <mat-error>
+              Le nom est obligatoire
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Prénom</mat-label>
+            <input matInput formControlName="prenom" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (clientForm.get('prenom')?.hasError('required')) {
+            <mat-error>
+              Le prénom est obligatoire
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>email</mat-icon>
+            @if (clientForm.get('email')?.hasError('required') || clientForm.get('email')?.hasError('email')) {
+            <mat-error>
+              Veuillez saisir une adresse email valide
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Téléphone</mat-label>
+            <input matInput formControlName="telephone" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>phone</mat-icon>
+            @if (clientForm.get('telephone')?.hasError('required')) {
+            <mat-error>
+              Le téléphone est obligatoire
+            </mat-error>
+            }
+            @if (clientForm.get('telephone')?.hasError('pattern')) {
+            <mat-error>
+              Format de téléphone invalide
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Structure</mat-label>
+            <input matInput formControlName="structure" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>business</mat-icon>
+            @if (clientForm.get('structure')?.hasError('required')) {
+            <mat-error>
+              La structure est obligatoire
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+          <div class="row" *ngIf="action!=='edit'">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Mot de passe</mat-label>
+                    <input matInput formControlName="password" type="password" required>
+                    @if (clientForm.get('password')?.hasError('required')) {
+                    <mat-error>
+                      Le mot de passe est requis
+                    </mat-error>
+                    }
+                    @if (clientForm.get('password')?.hasError('password')) {
+                    <mat-error>
+                      Veuillez entrer un mot de passe d'au moins 12 caractères
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Confirmer le mot de passe</mat-label>
+                    <input matInput formControlName="confirm" type="password" required>
+                    @if (clientForm.get('confirm')?.hasError('required')) {
+                    <mat-error>
+                      La confirmation du mot de passe est requise
+                    </mat-error>
+                    }
+
+                    <mat-error *ngIf="clientForm.hasError('mismatch')">
+                       Vos mots de passe sont différents
+                     </mat-error>
+
+                  
+                  </mat-form-field>
+                </div>
+              </div>
+        <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Rôle</mat-label>
+            <mat-select formControlName="role" required>
+              <mat-option value="Administrateur">Administrateur</mat-option>
+              <mat-option value="Manager">Manager</mat-option>
+              <mat-option value="Employé">Employé</mat-option>
+              <mat-option value="Client">Client</mat-option>
+              <mat-option value="Partenaire">Partenaire</mat-option>
+            </mat-select>
+            @if (clientForm.get('role')?.hasError('required')) {
+            <mat-error>
+              Le rôle est obligatoire
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>-->
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="action!=='edit' && !clientForm.valid" type="submit">
+               {{ action === 'edit' ? 'Modifier' : 'Enregistrer' }}</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

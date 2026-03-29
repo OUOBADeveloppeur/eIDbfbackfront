@@ -1,0 +1,27 @@
+<configuration>
+
+    <!-- Configuration pour la console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configuration pour le fichier de log courant avec archivage quotidien -->
+    <appender name="CURRENT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/demowuri.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/demowuri.%d{dd-MM-yyyy}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configuration du niveau de log global -->
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="CURRENT_FILE" />
+    </root>
+</configuration>
