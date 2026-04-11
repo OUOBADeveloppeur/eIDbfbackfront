@@ -79,6 +79,15 @@ public class DocumentServiceImpl implements DocumentService {
             existing.setType(type);
         }
 
+         if (documentDto.getDateExpiration() != null) {
+        LocalDate today = LocalDate.now();
+        if (documentDto.getDateExpiration().isBefore(today)) {
+                existing.setEtat(EtatDocument.EXPIRE);
+            } else {
+                existing.setEtat(EtatDocument.VALIDE);
+            }
+        }
+
         if (documentDto.getAutorite() != null) {
             AutoriteDelivrance autorite = autoriteRepository.findById(documentDto.getAutorite().getId())
                     .orElseThrow(() -> new RuntimeException("Autorité non trouvée"));
