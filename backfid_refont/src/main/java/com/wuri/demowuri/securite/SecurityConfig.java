@@ -139,6 +139,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(auth -> auth
@@ -149,6 +150,34 @@ public class SecurityConfig {
             .requestMatchers("/api/v1/qrcodes/verify").permitAll()
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .requestMatchers("/error").permitAll()
+            .requestMatchers(
+                            "/sdk/**",
+                            "/js/**",
+                            "/css/**",
+                            "/images/**"
+                        ).permitAll()
+
+            // ---------- OAuth 2.0 / OIDC — PUBLIC ----------
+            // Infos client (pour l'écran de consentement eIDbf)
+            .requestMatchers("/api/v1/oauth/clients/*").permitAll()
+            // Page HTML de login web (navigateur redirigé ici par la plateforme)
+            .requestMatchers(HttpMethod.GET, "/api/v1/oauth/authorize").permitAll()
+            // Validation credentials + création code (appelé par le JS de la page HTML)
+            .requestMatchers(HttpMethod.POST, "/api/v1/oauth/web/authorize").permitAll()
+            // Échange code → token (backend plateforme → backend eID)
+            .requestMatchers("/api/v1/oauth/token").permitAll()
+            // Userinfo avec token OAuth opaque (validé manuellement dans le contrôleur)
+            .requestMatchers("/api/v1/oauth/userinfo").permitAll()
+            // OIDC discovery document
+            .requestMatchers("/api/v1/oauth/.well-known/openid-configuration").permitAll()
+
+            // ---------- SSO QR — PUBLIC ----------
+            // Création de session QR (plugin/plateforme fournit client_secret dans le body)
+            .requestMatchers(HttpMethod.POST, "/api/v1/oauth/qr/create").permitAll()
+            // Polling du statut (pas de credentials requis)
+            .requestMatchers(HttpMethod.GET, "/api/v1/oauth/qr/*/status").permitAll()
+            // Image PNG du QR code
+            .requestMatchers(HttpMethod.GET, "/api/v1/oauth/qr/*/image").permitAll()
 
             // ---------- ADMIN ONLY ----------
             .requestMatchers(
@@ -189,7 +218,13 @@ public class SecurityConfig {
                 "/api/v1/qrcodes/all",
                 "/api/v1/typedocuments/creer",
                 "/api/v1/typedocuments/update/*",
-                "/api/v1/typedocuments/delete/*"
+                "/api/v1/typedocuments/delete/*",
+                // Gestion des numéros mobiles (création, modification, suppression)
+                "/api/v1/mobiles",
+                "/api/v1/mobiles/*",
+                // Gestion des clients OAuth (plateformes gouvernementales)
+                "/api/v1/oauth/admin/clients",
+                "/api/v1/oauth/admin/clients/*"
             ).hasRole("ADMIN")
 
             // ---------- ADMIN OR USER ----------
@@ -222,7 +257,18 @@ public class SecurityConfig {
                 "/api/v1/qrcodes/scan/*",
                 "/api/v1/qrcodes/personne/*/actifs",
                 "/api/v1/typedocuments/getById/*",
-                "/api/v1/typedocuments/all"
+                "/api/v1/typedocuments/all",
+                // Consultation des numéros mobiles par IU
+                "/api/v1/mobiles/iu/*",
+                // OTP WhatsApp (flux inscription — token compte service)
+                "/api/v1/mobiles/verify-phone-otp/*",
+                "/api/v1/mobiles/send-otp-selected/*",
+                "/api/v1/mobiles/verify-otp/*",
+                // OAuth — consentement approuvé par le citoyen connecté sur eIDbf (deep link)
+                "/api/v1/oauth/consent",
+                // SSO QR — approbation/refus par le citoyen connecté sur eIDbf
+                "/api/v1/oauth/qr/*/approve",
+                "/api/v1/oauth/qr/*/deny"
             ).hasAnyRole("ADMIN", "USER")
 
             // ---------- ANY OTHER REQUEST ----------
@@ -247,8 +293,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
-      //  configuration.setAllowedOrigins(List.of("http://localhost:4200","http://192.168.11.160:8080"));
+        // allowedOriginPatterns avec "*" est compatible avec allowCredentials(true)
+        // contrairement à setAllowedOrigins("*")
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
