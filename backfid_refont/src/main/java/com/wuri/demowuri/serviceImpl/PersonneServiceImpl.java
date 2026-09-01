@@ -22,11 +22,14 @@ import com.wuri.demowuri.dto.NotificationDto;
 import com.wuri.demowuri.dto.PersonneDto;
 import com.wuri.demowuri.dto.PersonneVM;
 import com.wuri.demowuri.enums.EtatPersonne;
+import com.wuri.demowuri.enums.OperateurMobile;
 import com.wuri.demowuri.mapper.NotificationMapper;
 import com.wuri.demowuri.mapper.PersonneMapper;
 import com.wuri.demowuri.model.Personne;
+import com.wuri.demowuri.model.Mobile;
 import com.wuri.demowuri.repository.NotificationRepository;
 import com.wuri.demowuri.repository.PersonneRepository;
+import com.wuri.demowuri.repository.MobileRepository;
 import com.wuri.demowuri.services.PersonneService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,7 @@ public class PersonneServiceImpl implements PersonneService {
     private final PersonneMapper personneMapper;
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
+    private final MobileRepository mobileRepository;
 
     @Value("${app.photos.dir:photos}")
     private String photosBaseDir;
@@ -56,7 +60,35 @@ public class PersonneServiceImpl implements PersonneService {
 
         Personne user = personneMapper.toEntity(userDto);
         user.setEtat(EtatPersonne.ACTIF);
-        return personneMapper.toDto(personneRepository.save(user));
+        Personne savedUser = personneRepository.save(user);
+
+        // Enregistrer automatiquement le numéro principal dans la table mobiles
+        if (user.getTelephone() != null && !user.getTelephone().isBlank()) {
+            OperateurMobile operateur = deduceOperateur(user.getTelephone());
+            Mobile mobile = Mobile.builder()
+                    .iu(iu)
+                    .numero(user.getTelephone().trim())
+                    .operateur(operateur)
+                    .valide(true)
+                    .build();
+            mobileRepository.save(mobile);
+        }
+
+        return personneMapper.toDto(savedUser);
+    }
+
+    private OperateurMobile deduceOperateur(String phone) {
+        String num = phone.trim();
+        if (num.startsWith("+226")) {
+            num = num.substring(4);
+        }
+        if (num.length() >= 8) {
+            String prefix = num.substring(0, 2);
+            if (prefix.matches("[0567][4-7]")) return OperateurMobile.ORANGE;
+            if (prefix.matches("[567][0-3]|0[1-3]")) return OperateurMobile.MOOV;
+            if (prefix.matches("[567][89]|09")) return OperateurMobile.TELECEL;
+        }
+        return OperateurMobile.ORANGE; // fallback
     }
 
     private String generateUniqueIU() {
@@ -172,7 +204,6 @@ public class PersonneServiceImpl implements PersonneService {
         user.setAdresse(userDto.getAdresse());
         user.setEtat(userDto.getEtat());
         user.setAgent(userDto.getAgent());
-
 
         if (userDto.getPassword() != null && !userDto.getPassword().isBlank()) {
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));

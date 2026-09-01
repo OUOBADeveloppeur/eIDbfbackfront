@@ -116,6 +116,11 @@ public class MobileServiceImpl implements MobileService {
                 return Map.of(
                         "status", "WHATSAPP_NOT_FOUND",
                         "message", "Ce numéro n'est pas associé à un compte WhatsApp. Vérifiez et réessayez.");
+            } catch (Exception e) {
+                otpSessions.remove(iu);
+                return Map.of(
+                        "status", "WHATSAPP_ERROR",
+                        "message", "Erreur d'envoi WhatsApp: " + e.getMessage());
             }
 
             return Map.of(
@@ -171,6 +176,11 @@ public class MobileServiceImpl implements MobileService {
             return Map.of(
                     "status", "WHATSAPP_NOT_FOUND",
                     "message", "Ce numéro n'est pas associé à un compte WhatsApp. Veuillez en sélectionner un autre.");
+        } catch (Exception e) {
+            otpSessions.remove(iu);
+            return Map.of(
+                    "status", "WHATSAPP_ERROR",
+                    "message", "Erreur d'envoi WhatsApp: " + e.getMessage());
         }
 
         return Map.of(

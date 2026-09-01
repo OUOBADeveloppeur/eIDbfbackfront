@@ -111,7 +111,6 @@ public class SecurityConfig {
 }
 */
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,137 +142,136 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(auth -> auth
-            // ---------- PUBLIC ----------
-            .requestMatchers("/api/v1/auth/**").permitAll()
-            .requestMatchers("/api/v1/personnes/photo/*").permitAll()
-            .requestMatchers("/api/v1/documents/photo/*").permitAll()
-            .requestMatchers("/api/v1/qrcodes/verify").permitAll()
-            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            .requestMatchers("/error").permitAll()
-            .requestMatchers(
-                            "/sdk/**",
-                            "/js/**",
-                            "/css/**",
-                            "/images/**"
-                        ).permitAll()
+                // ---------- PUBLIC ----------
+                .requestMatchers("/api/v1/auth/**").permitAll()
+                .requestMatchers("/api/v1/personnes/photo/*").permitAll()
+                .requestMatchers("/api/v1/documents/photo/*").permitAll()
+                .requestMatchers("/api/v1/qrcodes/verify").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/error").permitAll()
+                .requestMatchers(
+                        "/sdk/**",
+                        "/js/**",
+                        "/css/**",
+                        "/images/**")
+                .permitAll()
 
-            // ---------- OAuth 2.0 / OIDC — PUBLIC ----------
-            // Infos client (pour l'écran de consentement eIDbf)
-            .requestMatchers("/api/v1/oauth/clients/*").permitAll()
-            // Page HTML de login web (navigateur redirigé ici par la plateforme)
-            .requestMatchers(HttpMethod.GET, "/api/v1/oauth/authorize").permitAll()
-            // Validation credentials + création code (appelé par le JS de la page HTML)
-            .requestMatchers(HttpMethod.POST, "/api/v1/oauth/web/authorize").permitAll()
-            // Échange code → token (backend plateforme → backend eID)
-            .requestMatchers("/api/v1/oauth/token").permitAll()
-            // Userinfo avec token OAuth opaque (validé manuellement dans le contrôleur)
-            .requestMatchers("/api/v1/oauth/userinfo").permitAll()
-            // OIDC discovery document
-            .requestMatchers("/api/v1/oauth/.well-known/openid-configuration").permitAll()
+                // ---------- OAuth 2.0 / OIDC — PUBLIC ----------
+                // Infos client (pour l'écran de consentement eIDbf)
+                .requestMatchers("/api/v1/oauth/clients/*").permitAll()
+                // Page HTML de login web (navigateur redirigé ici par la plateforme)
+                .requestMatchers(HttpMethod.GET, "/api/v1/oauth/authorize").permitAll()
+                // Validation credentials + création code (appelé par le JS de la page HTML)
+                .requestMatchers(HttpMethod.POST, "/api/v1/oauth/web/authorize").permitAll()
+                // Échange code → token (backend plateforme → backend eID)
+                .requestMatchers("/api/v1/oauth/token").permitAll()
+                // Userinfo avec token OAuth opaque (validé manuellement dans le contrôleur)
+                .requestMatchers("/api/v1/oauth/userinfo").permitAll()
+                // OIDC discovery document
+                .requestMatchers("/api/v1/oauth/.well-known/openid-configuration").permitAll()
 
-            // ---------- SSO QR — PUBLIC ----------
-            // Création de session QR (plugin/plateforme fournit client_secret dans le body)
-            .requestMatchers(HttpMethod.POST, "/api/v1/oauth/qr/create").permitAll()
-            // Polling du statut (pas de credentials requis)
-            .requestMatchers(HttpMethod.GET, "/api/v1/oauth/qr/*/status").permitAll()
-            // Image PNG du QR code
-            .requestMatchers(HttpMethod.GET, "/api/v1/oauth/qr/*/image").permitAll()
+                // ---------- SSO QR — PUBLIC ----------
+                // Création de session QR (plugin/plateforme fournit client_secret dans le body)
+                .requestMatchers(HttpMethod.POST, "/api/v1/oauth/qr/create").permitAll()
+                // Polling du statut (pas de credentials requis)
+                .requestMatchers(HttpMethod.GET, "/api/v1/oauth/qr/*/status").permitAll()
+                // Image PNG du QR code
+                .requestMatchers(HttpMethod.GET, "/api/v1/oauth/qr/*/image").permitAll()
 
-            // ---------- ADMIN ONLY ----------
-            .requestMatchers(
-                "/api/v1/autorites/creer",
-                "/api/v1/autorites/update/*",
-                "/api/v1/autorites/delete/*",
-                "/api/v1/autorites/all",
-                "/api/v1/logs/date/*",
-                "/api/v1/logs/current",
-                "api/v1/stats/counts",
-                "/api/v1/roles/creer",
-                "/api/v1/roles/update/*",
-                "/api/v1/roles/delete/*",
-                "/api/v1/users/creer",
-                "/api/v1/users/update/*",
-                "/api/v1/users/delete/*",
-                "/api/v1/users/update/password/*",
-                "/api/v1/documents/creer",
-               
-                 "/api/v1/documents/upload/*",
-                "/api/v1/documents/delete/*",
-                "/api/v1/documents/autorite/*",
-                "/api/v1/documents/type/*",
-                "/api/v1/documents/all",
-                "/api/v1/eservices/creer",
-                "/api/v1/eservices/update/*",
-                "/api/v1/eservices/delete/*",
-                "/api/v1/notifications/creer",
-                "/api/v1/notifications/all",
-                "/api/v1/notifications/update/*",
-                "/api/v1/personnes/creer",
-                "/api/v1/personnes/delete/*",
-                "/api/v1/personnes/all",
-                "/api/v1/personnes/*/activer",
-                "/api/v1/personnes/*/desactiver",
-                "/api/v1/qrcodes/update/*",
-                "/api/v1/qrcodes/delete/*",
-                "/api/v1/qrcodes/all",
-                "/api/v1/typedocuments/creer",
-                "/api/v1/typedocuments/update/*",
-                "/api/v1/typedocuments/delete/*",
-                // Gestion des numéros mobiles (création, modification, suppression)
-                "/api/v1/mobiles",
-                "/api/v1/mobiles/*",
-                // Gestion des clients OAuth (plateformes gouvernementales)
-                "/api/v1/oauth/admin/clients",
-                "/api/v1/oauth/admin/clients/*"
-            ).hasRole("ADMIN")
+                // ---------- ADMIN ONLY ----------
+                .requestMatchers(
+                        "/api/v1/autorites/creer",
+                        "/api/v1/autorites/update/*",
+                        "/api/v1/autorites/delete/*",
+                        "/api/v1/autorites/all",
+                        "/api/v1/logs/date/*",
+                        "/api/v1/logs/current",
+                        "api/v1/stats/counts",
+                        "/api/v1/roles/creer",
+                        "/api/v1/roles/update/*",
+                        "/api/v1/roles/delete/*",
+                        "/api/v1/users/creer",
+                        "/api/v1/users/update/*",
+                        "/api/v1/users/delete/*",
+                        "/api/v1/users/update/password/*",
+                        "/api/v1/documents/creer",
 
-            // ---------- ADMIN OR USER ----------
-            .requestMatchers(
-                "/api/v1/autorites/getById/*",
-                "/api/v1/roles/show/*",
-                "/api/v1/roles/liste",
-                "/api/v1/users/show/*",
-                "/api/v1/users/liste",
-                "/api/v1/documents/getById/*",
-                "/api/v1/documents/search",
-                "/api/v1/documents/personnes/*/documents",
-                "/api/v1/eservices/getById/*",
-                "/api/v1/eservices/all",
-                "/api/v1/notifications/getById/*",
-                "/api/v1/notifications/personne/*",
-                "/api/v1/notifications/personne/*/unread",
-                "/api/v1/notifications/unread-count/*",
-                "/api/v1/notifications/read/*",
-                "/api/v1/notifications/delete/*",
-                "/api/v1/personnes/getById/*",
-                "/api/v1/personnes/login",
-                "/api/v1/personnes/iu/*",
-                "/api/v1/personnes/update/**",
-                "/api/v1/personnes/verify/*",
-                "/api/v1/personnes/telephone/*",
-                "/api/v1/qrcodes/creer",
-                "/api/v1/qrcodes/getById/*",
-                "/api/v1/qrcodes/personne/*",
-                "/api/v1/qrcodes/scan/*",
-                "/api/v1/qrcodes/personne/*/actifs",
-                "/api/v1/typedocuments/getById/*",
-                "/api/v1/typedocuments/all",
-                // Consultation des numéros mobiles par IU
-                "/api/v1/mobiles/iu/*",
-                // OTP WhatsApp (flux inscription — token compte service)
-                "/api/v1/mobiles/verify-phone-otp/*",
-                "/api/v1/mobiles/send-otp-selected/*",
-                "/api/v1/mobiles/verify-otp/*",
-                // OAuth — consentement approuvé par le citoyen connecté sur eIDbf (deep link)
-                "/api/v1/oauth/consent",
-                // SSO QR — approbation/refus par le citoyen connecté sur eIDbf
-                "/api/v1/oauth/qr/*/approve",
-                "/api/v1/oauth/qr/*/deny"
-            ).hasAnyRole("ADMIN", "USER")
+                        "/api/v1/documents/upload/*",
+                        "/api/v1/documents/delete/*",
+                        "/api/v1/documents/autorite/*",
+                        "/api/v1/documents/type/*",
+                        "/api/v1/documents/all",
+                        "/api/v1/eservices/creer",
+                        "/api/v1/eservices/update/*",
+                        "/api/v1/eservices/delete/*",
+                        "/api/v1/notifications/creer",
+                        "/api/v1/notifications/all",
+                        "/api/v1/notifications/update/*",
+                        "/api/v1/personnes/creer",
+                        "/api/v1/personnes/delete/*",
+                        "/api/v1/personnes/all",
+                        "/api/v1/personnes/*/activer",
+                        "/api/v1/personnes/*/desactiver",
+                        "/api/v1/qrcodes/update/*",
+                        "/api/v1/qrcodes/delete/*",
+                        "/api/v1/qrcodes/all",
+                        "/api/v1/typedocuments/creer",
+                        "/api/v1/typedocuments/update/*",
+                        "/api/v1/typedocuments/delete/*",
+                        // Gestion des numéros mobiles (création, modification, suppression)
+                        "/api/v1/mobiles",
+                        "/api/v1/mobiles/*",
+                        // Gestion des clients OAuth (plateformes gouvernementales)
+                        "/api/v1/oauth/admin/clients",
+                        "/api/v1/oauth/admin/clients/*")
+                .hasRole("ADMIN")
 
-            // ---------- ANY OTHER REQUEST ----------
-            .anyRequest().authenticated()
-        );
+                // ---------- ADMIN OR USER ----------
+                .requestMatchers(
+                        "/api/v1/autorites/getById/*",
+                        "/api/v1/roles/show/*",
+                        "/api/v1/roles/liste",
+                        "/api/v1/users/show/*",
+                        "/api/v1/users/liste",
+                        "/api/v1/documents/getById/*",
+                        "/api/v1/documents/search",
+                        "/api/v1/documents/personnes/*/documents",
+                        "/api/v1/eservices/getById/*",
+                        "/api/v1/eservices/all",
+                        "/api/v1/notifications/getById/*",
+                        "/api/v1/notifications/personne/*",
+                        "/api/v1/notifications/personne/*/unread",
+                        "/api/v1/notifications/unread-count/*",
+                        "/api/v1/notifications/read/*",
+                        "/api/v1/notifications/delete/*",
+                        "/api/v1/personnes/getById/*",
+                        "/api/v1/personnes/login",
+                        "/api/v1/personnes/iu/*",
+                        "/api/v1/personnes/update/**",
+                        "/api/v1/personnes/verify/*",
+                        "/api/v1/personnes/telephone/*",
+                        "/api/v1/qrcodes/creer",
+                        "/api/v1/qrcodes/getById/*",
+                        "/api/v1/qrcodes/personne/*",
+                        "/api/v1/qrcodes/scan/*",
+                        "/api/v1/qrcodes/personne/*/actifs",
+                        "/api/v1/typedocuments/getById/*",
+                        "/api/v1/typedocuments/all",
+                        // Consultation des numéros mobiles par IU
+                        "/api/v1/mobiles/iu/*",
+                        // OTP WhatsApp (flux inscription — token compte service)
+                        "/api/v1/mobiles/verify-phone-otp/*",
+                        "/api/v1/mobiles/send-otp-selected/*",
+                        "/api/v1/mobiles/verify-otp/*",
+                        // OAuth — consentement approuvé par le citoyen connecté sur eIDbf (deep link)
+                        "/api/v1/oauth/consent",
+                        // SSO QR — approbation/refus par le citoyen connecté sur eIDbf
+                        "/api/v1/oauth/qr/*/approve",
+                        "/api/v1/oauth/qr/*/deny")
+                .hasAnyRole("ADMIN", "USER")
+
+                // ---------- ANY OTHER REQUEST ----------
+                .anyRequest().authenticated());
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

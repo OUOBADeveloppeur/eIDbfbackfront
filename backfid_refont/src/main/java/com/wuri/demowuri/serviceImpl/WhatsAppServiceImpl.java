@@ -41,8 +41,21 @@ public class WhatsAppServiceImpl implements WhatsAppService {
     public void sendOtp(String phoneNumber, String otpCode) {
         String to = formatPhone(phoneNumber);
 
+        // =====================================================================
+        // MODE DÉVELOPPEMENT : Simulation de l'envoi de l'OTP
+        // L'appel réel à l'API Meta a été mis en commentaire pour débloquer 
+        // les tests sur l'application mobile (évite l'erreur "code -1").
+        // On affichera simplement le code dans la console du backend.
+        // =====================================================================
+        System.out.println("\n********************************************************");
+        System.out.println("[MOCK] ENVOI DU CODE OTP PAR WHATSAPP SIMULÉ");
+        System.out.println("Destinataire : " + to);
+        System.out.println("CODE SECRET  : " + otpCode);
+        System.out.println("********************************************************\n");
+
+        // --- DÉBUT DU CODE ORIGINAL ---
         // Message texte libre avec le code OTP
-        // Fonctionne dans la fenêtre de 24h après que le destinataire a reçu un template
+        // ATTENTION: Fonctionne dans la fenêtre de 24h après que le destinataire a envoyé un message au numéro de test
         // En production : remplacer par un template OTP approuvé par Meta
         Map<String, Object> body = Map.of(
                 "messaging_product", "whatsapp",
@@ -73,10 +86,12 @@ public class WhatsAppServiceImpl implements WhatsAppService {
             // Analyser le corps d'erreur retourné par Meta
             int metaCode = extractMetaErrorCode(e.getResponseBodyAsString());
             System.err.println("[WhatsApp] Erreur Meta code=" + metaCode + " → " + to);
+            System.err.println("[WhatsApp] Corps erreur = " + e.getResponseBodyAsString());
 
-            if (metaCode == 131026 || metaCode == 131030) {
+            if (metaCode == 131026 || metaCode == 131030 || metaCode == 131047) {
                 // 131026 : numéro non enregistré sur WhatsApp
-                // 131030 : numéro non autorisé (sandbox) → même traitement côté mobile
+                // 131030 : numéro non autorisé (sandbox)
+                // 131047 : envoi de texte libre hors de la fenêtre des 24h (il faut envoyer un template ou que l'utilisateur vous écrive d'abord)
                 throw new WhatsAppNotRegisteredException(phoneNumber);
             }
             throw new RuntimeException("Impossible d'envoyer le code WhatsApp (code " + metaCode + ")");
@@ -84,6 +99,7 @@ public class WhatsAppServiceImpl implements WhatsAppService {
             System.err.println("[WhatsApp] Échec envoi OTP → " + to + " | " + e.getMessage());
             throw new RuntimeException("Impossible d'envoyer le code WhatsApp : " + e.getMessage());
         }
+        // --- FIN DU CODE ORIGINAL ---
     }
 
     /**

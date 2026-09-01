@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   //apiUrl: 'http://192.168.11.162:8081/api/v1/',
-  apiUrl: 'http://localhost:8081/api/v1/',
-  username:'aristide',
-  password:'aristide123'
+  apiUrl: 'http://localhost:8080/api/v1/',
+  username: 'aristide',
+  password: 'aristide123'
 };
 
 /*
