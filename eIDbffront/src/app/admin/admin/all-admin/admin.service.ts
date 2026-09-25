@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Admin } from './admin.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { AuthService } from '@core/service/auth.service';
 import { Api } from 'app/admin/api/api.model';
 

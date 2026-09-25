@@ -5,7 +5,7 @@ import { User } from '../models/user';
 import  {Admin} from '../models/admin'
 import { Role } from '@core/models/role';
 
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -182,3 +182,4 @@ export class AuthService {
     return of({ success: false });
   }
 }
+

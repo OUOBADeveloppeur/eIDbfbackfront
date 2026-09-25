@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { PhotoUploadModalComponent } from '../../allCitoyens/dialogs/photo/photo.component';
 import { EmployeesService } from '../../allCitoyens/employees.service';
 
@@ -55,3 +55,4 @@ export class DocumentPhotoDialogueComponent {
   }
 
 }
+

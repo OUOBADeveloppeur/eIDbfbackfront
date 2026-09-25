@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { TypeDocument } from './type-document.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { AuthService } from '@core/service/auth.service';
 
 @Injectable({
@@ -90,3 +90,4 @@ export class TypeDocumentService {
     );
   }
 }
+

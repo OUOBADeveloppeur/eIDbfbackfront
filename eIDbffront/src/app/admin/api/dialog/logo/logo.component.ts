@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from '@core/service/auth.service';
 import { Api } from '../../api.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 
 
@@ -91,3 +91,4 @@ name:string
 }
 
 }
+

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import {  Authorite } from './all-holidays.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { AuthService } from '@core/service/auth.service';
 import { Transaction } from './transaction.model';
 import { aU } from '@fullcalendar/core/internal-common';
@@ -179,3 +179,4 @@ export class HolidayService {
     );
   }
 }
+

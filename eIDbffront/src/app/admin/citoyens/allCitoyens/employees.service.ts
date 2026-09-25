@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Personne } from './employees.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { AuthService } from '@core/service/auth.service';
 import { reference } from '@popperjs/core';
 

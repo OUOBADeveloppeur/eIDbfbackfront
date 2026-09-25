@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogContent } from '@angular/material/dialog';
 import { EmployeesService } from '../../employees.service';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
@@ -51,3 +51,4 @@ export class PhotoUploadModalComponent {
     this.dialogRef.close();
   }
 }
+

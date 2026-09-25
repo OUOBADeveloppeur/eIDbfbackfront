@@ -27,7 +27,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from 'app/admin/admin/all-admin/admin.service';
 import { Admin } from 'app/admin/admin/all-admin/admin.model';
 import { Personne } from '../../employees.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 export interface DialogData {
   id: number;
@@ -224,3 +224,4 @@ export class AllEmployeesFormComponent {
     this.dialogRef.close();
   }
 }
+

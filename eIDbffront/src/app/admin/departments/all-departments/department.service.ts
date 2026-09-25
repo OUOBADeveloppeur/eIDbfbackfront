@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Department } from './department.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -171,3 +171,4 @@ export class DepartmentService {
     );
   }
 }
+

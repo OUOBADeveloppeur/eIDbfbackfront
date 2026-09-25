@@ -5,7 +5,7 @@ import { Project, ProjectAdapter } from './project.model';
 // import { PROJECTS } from "./project.data";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -157,3 +157,4 @@ export class ProjectService extends UnsubscribeOnDestroyAdapter {
       );
     }
 }
+

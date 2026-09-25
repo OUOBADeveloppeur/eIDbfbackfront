@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { AuthService } from '@core/service/auth.service';
 import { aU } from '@fullcalendar/core/internal-common';
 import { Eservice } from './all-eservices.model';
@@ -169,3 +169,4 @@ export class EserviceService {
     );
   }
 }
+

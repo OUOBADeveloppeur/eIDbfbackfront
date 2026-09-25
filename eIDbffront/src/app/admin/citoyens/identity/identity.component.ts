@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { EmployeesService } from '../allCitoyens/employees.service';
 
 @Component({
@@ -100,3 +100,4 @@ loadCitoyen(id:number){
 }
 
 }
+

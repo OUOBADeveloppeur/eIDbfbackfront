@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError, map } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { EmployeeSalary } from './employee-salary.model';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { AuthService } from '@core/service/auth.service';
 import { Payout } from './payout.model';
 import { Personne } from 'app/admin/citoyens/allCitoyens/employees.model';
@@ -201,3 +201,4 @@ export class EmployeeSalaryService {
     );
   }
 }
+
